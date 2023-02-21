@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->foreignId('teacher_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('teacher_id')
+                ->nullable()
+                ->constrained()
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

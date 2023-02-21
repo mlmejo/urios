@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -38,6 +39,7 @@ Route::middleware('auth')->group(function () {
 
 Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () {
     Route::resource('teachers', TeacherController::class);
+    Route::resource('sections', SectionController::class);
 });
 
 require __DIR__ . '/auth.php';

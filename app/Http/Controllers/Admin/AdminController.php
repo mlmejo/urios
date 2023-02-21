@@ -3,20 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Student;
+use App\Models\Dashboard;
+use App\Models\Section;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Inertia\Inertia;
+use Inertia\Response;
 
-
-class StudentController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(): Response
     {
-        //
+        return Inertia::render('Dashboard', [
+            'sections' => Section::all(),
+        ]);
     }
 
     /**
@@ -38,7 +41,7 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Student $student): Response
+    public function show(Dashboard $dashboard): Response
     {
         //
     }
@@ -46,7 +49,7 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Student $student): Response
+    public function edit(Dashboard $dashboard): Response
     {
         //
     }
@@ -54,7 +57,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student): RedirectResponse
+    public function update(Request $request, Dashboard $dashboard): RedirectResponse
     {
         //
     }
@@ -62,7 +65,7 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Student $student): RedirectResponse
+    public function destroy(Dashboard $dashboard): RedirectResponse
     {
         //
     }
