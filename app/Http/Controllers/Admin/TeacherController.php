@@ -63,7 +63,7 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher): Response
     {
-        //
+        return Inertia::render('Admin/Teachers/Edit', compact('teacher'));
     }
 
     /**
@@ -71,7 +71,21 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher): RedirectResponse
     {
-        //
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string',
+        ]);
+
+        $teacher = Teacher::create();
+
+        $teacher->user()->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect(route('admin.teachers.index'));
     }
 
     /**
