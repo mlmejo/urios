@@ -21,7 +21,12 @@ export default function DashboardLayout({ auth, errors, children }) {
           <div className="flex flex-col gap-y-2 py-6">
             <Item title="Dashboard" Icon={HomeIcon} />
             <Collapse title="Data" Icon={CircleStackIcon}>
-              <Item title="Accounts" Icon={UserGroupIcon} className="pl-6" />
+              <Item
+                title="Accounts"
+                Icon={UserGroupIcon}
+                className="pl-6"
+                href={route("admin.teachers.index")}
+              />
               <Item
                 title="Sections"
                 Icon={BuildingOfficeIcon}
@@ -50,10 +55,11 @@ export default function DashboardLayout({ auth, errors, children }) {
   );
 }
 
-function Item({ title, Icon, className }) {
+function Item({ title, Icon, className, href }) {
   return (
     <a
       className={`font-base group flex cursor-pointer items-center gap-x-4 rounded-md p-2 hover:bg-indigo-900 ${className}`}
+      href={href}
     >
       <Icon className="h-6 w-6 text-gray-500 group-hover:text-white" />
       <span className="group-hover:text-white">{title}</span>
