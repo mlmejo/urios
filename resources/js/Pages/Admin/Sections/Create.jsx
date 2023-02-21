@@ -21,7 +21,11 @@ export default function Create(props) {
         <div className="mx-auto min-h-screen max-w-7xl sm:px-6 lg:px-8">
           <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
             <div className=" border-b border-gray-200 bg-white p-6">
-              <form onSubmit={submit} className="grid grid-cols-2 gap-5">
+              {/* contentes here */}
+              <h3 className="text-lg font-semibold text-indigo-900">
+                Sections Creation
+              </h3>
+              <form onSubmit={submit} className="mt-5 grid grid-cols-2 gap-5">
                 <div className="input-group">
                   <InputLabel value={"Section Name"} className={"pb-3"} />
                   <TextInput
