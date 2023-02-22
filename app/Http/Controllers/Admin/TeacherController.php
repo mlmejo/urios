@@ -7,7 +7,6 @@ use App\Models\Teacher;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -19,7 +18,9 @@ class TeacherController extends Controller
      */
     public function index(): Response
     {
-        return Inertia::render('Admin/Teachers/Index', []);
+        return Inertia::render('Admin/Teachers/Index', [
+            'teachers' => Teacher::with('user:id,userable_id,name,email')->get(),
+        ]);
     }
 
     /**

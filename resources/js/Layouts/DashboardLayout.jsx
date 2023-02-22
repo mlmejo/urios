@@ -12,6 +12,7 @@ import {
   PencilIcon,
   UserGroupIcon,
 } from "@heroicons/react/20/solid";
+import { Link } from "@inertiajs/react";
 
 export default function DashboardLayout({ auth, errors, children }) {
   return (
@@ -29,7 +30,11 @@ export default function DashboardLayout({ auth, errors, children }) {
               <Item title="Sections" Icon={BuildingOfficeIcon} />
             </Collapse>
             <Collapse title="Create" Icon={PencilIcon}>
-              <Item title="Accounts" Icon={UserGroupIcon} className="pl-6" />
+              <Item
+                title="Accounts"
+                Icon={UserGroupIcon}
+                href={route("admin.teachers.create")}
+              />
               <Item title="Sections" Icon={BuildingOfficeIcon} />
               <Item title="Import CSV" Icon={DocumentTextIcon} />
             </Collapse>
@@ -44,13 +49,13 @@ export default function DashboardLayout({ auth, errors, children }) {
 
 function Item({ title, Icon, href }) {
   return (
-    <a
+    <Link
       className="sidebar-item font-base group flex cursor-pointer items-center gap-x-4 rounded-md p-2 hover:bg-indigo-900"
       href={href}
     >
       <Icon className="h-6 w-6 text-gray-500 group-hover:text-white" />
       <span className="group-hover:text-white">{title}</span>
-    </a>
+    </Link>
   );
 }
 

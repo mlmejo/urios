@@ -1,7 +1,7 @@
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 import AccountsLayout from "@/Layouts/AccountsLayout";
 
-export default function Index({ auth, errors }) {
+export default function Index({ auth, errors, teachers }) {
   return (
     <AccountsLayout auth={auth} errors={errors}>
       <Head title="Teachers" />
@@ -25,31 +25,40 @@ export default function Index({ auth, errors }) {
           </tr>
         </thead>
         <tbody>
-          <tr className="border-b bg-white hover:bg-indigo-500 hover:text-white">
-            <th
-              scope="row"
-              className="whitespace-nowrap px-6 py-4 font-medium  "
-            >
-              19001
-            </th>
-            <td className="px-6 py-4">Jhoniel Villacura</td>
-            <td className="px-6 py-4">jhoniel.villacura@gmail.com</td>
+          {teachers.map((teacher, index) => {
+            return (
+              <tr
+                key={index}
+                className="border-b bg-white hover:bg-indigo-500 hover:text-white"
+              >
+                <th
+                  scope="row"
+                  className="whitespace-nowrap px-6 py-4 font-medium  "
+                >
+                  {1900 + teacher.id}
+                </th>
+                <td className="px-6 py-4">{teacher.user.name}</td>
+                <td className="px-6 py-4">{teacher.user.email}</td>
 
-            <td className="space-x-4 px-6 py-4 ">
-              <a
-                href="#"
-                className="rounded-lg bg-blue-500 px-2 py-1 font-medium text-white"
-              >
-                Edit
-              </a>
-              <a
-                href="#"
-                className="rounded-lg bg-red-500 px-2 py-1 font-medium text-white"
-              >
-                Delete
-              </a>
-            </td>
-          </tr>
+                <td className="flex space-x-4 px-6 py-4">
+                  <a
+                    href="#"
+                    className="rounded-lg bg-blue-500 px-2 py-1 font-medium text-white"
+                  >
+                    Edit
+                  </a>
+                  <Link
+                    href={route("admin.teachers.destroy", teacher.id)}
+                    className="rounded-lg bg-red-500 px-2 py-1 font-medium text-white"
+                    method="delete"
+                    as="button"
+                  >
+                    Delete
+                  </Link>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </AccountsLayout>
