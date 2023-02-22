@@ -1,12 +1,27 @@
 import { Head, Link } from "@inertiajs/react";
 import AccountsLayout from "@/Layouts/AccountsLayout";
+import MyModal from "@/Components/MyModal";
+import Alert from "@/Components/Alert";
+import { useState } from "react";
 
 export default function Index({ auth, errors, teachers }) {
+  const [modal, setModal] = useState(false);
+  const [alert, setAlert] = useState(modal);
   return (
     <AccountsLayout auth={auth} errors={errors}>
       <Head title="Teachers" />
+      <h3 className={` table-title py-5 text-2xl`}>Teacher Accounts</h3>
+      {/* Alert */}
 
-      <h3 className="table-title py-5 text-2xl">Teacher Accounts</h3>
+      {alert ? (
+        <Alert
+          alert={alert}
+          children={"Teacher account deleted successfully!"}
+        />
+      ) : (
+        ""
+      )}
+
       <table className="w-full text-left text-sm text-gray-500">
         <thead className="bg-indigo-900  text-xs uppercase text-white ">
           <tr>
@@ -41,17 +56,29 @@ export default function Index({ auth, errors, teachers }) {
                 <td className="px-6 py-4">{teacher.user.email}</td>
 
                 <td className="flex space-x-4 px-6 py-4">
-                  <a
+                  {/* <a
                     href="#"
                     className="rounded-lg bg-blue-500 px-2 py-1 font-medium text-white"
                   >
                     Edit
-                  </a>
+                  </a> */}
+                  <button
+                    onClick={() => {
+                      setModal(!modal);
+                    }}
+                    className="rounded-lg bg-blue-500 px-2 py-1 font-medium text-white"
+                  >
+                    Edit
+                  </button>
+
                   <Link
                     href={route("admin.teachers.destroy", teacher.id)}
                     className="rounded-lg bg-red-500 px-2 py-1 font-medium text-white"
                     method="delete"
                     as="button"
+                    onClick={() => {
+                      setAlert(true);
+                    }}
                   >
                     Delete
                   </Link>

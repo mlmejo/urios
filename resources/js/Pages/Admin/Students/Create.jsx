@@ -1,6 +1,7 @@
 import { Head, useForm } from "@inertiajs/react";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
+import MyModal from "@/Components/MyModal";
+import Alert from "@/Components/Alert";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
@@ -8,6 +9,8 @@ import TextInput from "@/Components/TextInput";
 import CreateAccountLayout from "@/Layouts/CreateAccountLayout";
 
 export default function Create(props) {
+  const [alert, setAlert] = useState(false);
+
   const { data, setData, post, processing, errors, reset } = useForm({
     name: "",
     email: "",
@@ -40,6 +43,11 @@ export default function Create(props) {
     <CreateAccountLayout auth={props.auth} errors={props.errors}>
       <Head title="Students" />
       <div className="border-b border-gray-200 bg-white p-6">
+        {alert ? (
+          <Alert alert={alert} children={"Account Created Successfull!"} />
+        ) : (
+          ""
+        )}
         <h1 className="text-md pb-10 font-semibold">Create Student Account</h1>
         <div className="border-b-2 pb-5">
           <form onSubmit={submit}>
@@ -118,7 +126,13 @@ export default function Create(props) {
             </div>
 
             <div className="mt-4 flex items-center justify-end">
-              <PrimaryButton className="ml-4" processing={processing}>
+              <PrimaryButton
+                onClick={() => {
+                  setAlert(true);
+                }}
+                className="ml-4"
+                processing={processing}
+              >
                 Register
               </PrimaryButton>
             </div>

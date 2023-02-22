@@ -1,12 +1,26 @@
 import { Head } from "@inertiajs/react";
 import AccountsLayout from "@/Layouts/AccountsLayout";
 
+import { useState } from "react";
+
 export default function Index({ auth, errors }) {
+  const [alert, setAlert] = useState(false);
+
   return (
     <AccountsLayout auth={auth} errors={errors}>
       <Head title="Students" />
 
       <h3 className="table-title py-5 text-2xl">Student Accounts</h3>
+
+      {alert ? (
+        <Alert
+          alert={alert}
+          children={"Teacher account deleted successfully!"}
+        />
+      ) : (
+        ""
+      )}
+
       <table className="w-full text-left text-sm text-gray-500">
         <thead className="bg-indigo-900  text-xs uppercase text-white ">
           <tr>
