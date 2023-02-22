@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-
+use Inertia\Inertia;
+use Inertia\Response;
 
 class StudentController extends Controller
 {
@@ -16,7 +16,7 @@ class StudentController extends Controller
      */
     public function index(): Response
     {
-        //
+        return Inertia::render('Admin/Students/Index');
     }
 
     /**
@@ -24,21 +24,13 @@ class StudentController extends Controller
      */
     public function create(): Response
     {
-        //
+        return Inertia::render('Admin/Students/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request): RedirectResponse
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Student $student): Response
     {
         //
     }
@@ -64,6 +56,10 @@ class StudentController extends Controller
      */
     public function destroy(Student $student): RedirectResponse
     {
-        //
+        $student->user->delete();
+
+        $student->delete();
+
+        return redirect(route('admin.students.index'));
     }
 }

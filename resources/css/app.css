@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.collapse-items > .sidebar-item {
+    @apply pl-6;
+}
