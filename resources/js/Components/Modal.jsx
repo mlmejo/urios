@@ -3,7 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 
 export default function Modal({
   children,
-  show = false,
+  show = true,
   maxWidth = "2xl",
   closeable = true,
   onClose = () => {},

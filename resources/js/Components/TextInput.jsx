@@ -11,6 +11,7 @@ export default forwardRef(function TextInput(
     required,
     isFocused,
     handleChange,
+    placeHolder,
   },
   ref
 ) {
@@ -30,10 +31,11 @@ export default forwardRef(function TextInput(
         id={id}
         value={value}
         className={
-          `rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 ` +
+          `min-w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 ` +
           className
         }
         ref={input}
+        placeholder={placeHolder}
         autoComplete={autoComplete}
         required={required}
         onChange={(e) => handleChange(e)}

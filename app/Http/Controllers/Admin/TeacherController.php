@@ -7,6 +7,7 @@ use App\Models\Teacher;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -17,7 +18,9 @@ class TeacherController extends Controller
      */
     public function index(): Response
     {
-        return Inertia::render('Admin/Teachers/Index', []);
+        return Inertia::render('Admin/Teachers/Index', [
+            'teachers' => Teacher::with('user:id,userable_id,name,email')->get(),
+        ]);
     }
 
     /**
@@ -36,7 +39,7 @@ class TeacherController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
-            'password' => 'required|string',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $teacher = Teacher::create();
@@ -48,14 +51,6 @@ class TeacherController extends Controller
         ]);
 
         return redirect(route('admin.teachers.create'));
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Teacher $teacher): Response
-    {
-        //
     }
 
     /**
@@ -73,16 +68,12 @@ class TeacherController extends Controller
     {
         $request->validate([
             'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string',
         ]);
 
         $teacher = Teacher::create();
 
         $teacher->user()->update([
             'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
         ]);
 
         return redirect(route('admin.teachers.index'));

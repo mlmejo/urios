@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\validation\Rules;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class StudentController extends Controller
 {
@@ -15,7 +18,9 @@ class StudentController extends Controller
      */
     public function index(): Response
     {
-        //
+        return Inertia::render('Admin/Students/Index', [
+            'students' => Student::with('user:id,userable_id,name,email')->get(),
+        ]);
     }
 
     /**
@@ -23,7 +28,7 @@ class StudentController extends Controller
      */
     public function create(): Response
     {
-        //
+        return Inertia::render('Admin/Students/Create');
     }
 
     /**
@@ -31,15 +36,21 @@ class StudentController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Student $student): Response
-    {
-        //
+        $students = Student::create();
+
+        $students->user()->create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect(route('admin.students.create'));
     }
 
     /**
@@ -63,6 +74,10 @@ class StudentController extends Controller
      */
     public function destroy(Student $student): RedirectResponse
     {
-        //
+        $student->user->delete();
+
+        $student->delete();
+
+        return redirect(route('admin.students.index'));
     }
 }
