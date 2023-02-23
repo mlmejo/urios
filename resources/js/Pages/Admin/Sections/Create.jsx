@@ -1,11 +1,12 @@
+import { Head, useForm, usePage } from "@inertiajs/react";
+
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import DashboardLayout from "@/Layouts/DashboardLayout";
-import { Head, useForm } from "@inertiajs/react";
 
-export default function Create(props) {
-  const { data, setData, post, processing, reset, errors } = useForm({
+export default function Create({ auth, errors, educational_stages }) {
+  const { data, setData, post, processing, reset } = useForm({
     name: "",
   });
 
@@ -15,7 +16,7 @@ export default function Create(props) {
   };
 
   return (
-    <DashboardLayout auth={props.auth} errors={props.errors}>
+    <DashboardLayout auth={auth} errors={errors}>
       <Head title="Create Section" />
       <div className="py-12">
         <div className="mx-auto min-h-screen max-w-7xl sm:px-6 lg:px-8">
@@ -34,6 +35,15 @@ export default function Create(props) {
                       placeHolder="Balagtas"
                     />
                   </div>
+                  <select name="education_stage" className="mb-3">
+                    {educational_stages.map((educational_stage, index) => {
+                      return (
+                        <option value={educational_stage.id} key={index}>
+                          {educational_stage.name}
+                        </option>
+                      );
+                    })}
+                  </select>
                   <div className="input-group col-span-2">
                     <PrimaryButton processing={processing}>
                       Submit

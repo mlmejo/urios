@@ -23,6 +23,8 @@ export default function Index({ auth, errors, teachers }) {
         ""
       )}
 
+      {console.log(teachers)}
+
       <table className="w-full text-left text-sm text-gray-500">
         <thead className="bg-indigo-900  text-xs uppercase text-white ">
           <tr>

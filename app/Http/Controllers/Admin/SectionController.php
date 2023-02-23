@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\EducationStage;
 use App\Models\Section;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,7 +27,9 @@ class SectionController extends Controller
      */
     public function create(): Response
     {
-        return Inertia::render('Admin/Sections/Create');
+        return Inertia::render('Admin/Sections/Create', [
+            'educational_stages' => EducationStage::all(),
+        ]);
     }
 
     /**
