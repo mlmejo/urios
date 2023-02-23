@@ -18,7 +18,7 @@ export default function AccountsLayout({ auth, errors, children }) {
                 href={route("admin.students.index")}
               />
             </div>
-            <div className="relative overflow-x-auto sm:rounded-lg">
+            <div className="relative h-screen overflow-x-auto sm:rounded-lg">
               {children}
             </div>
           </div>

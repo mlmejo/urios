@@ -6,7 +6,7 @@ export default function CreateAccountLayout({ auth, errors, children }) {
     <DashboardLayout auth={auth} errors={errors}>
       <div className="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
         <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-          <div className="border-b border-gray-200 bg-white p-6">
+          <div className="bg-white p-6">
             <h3 className="text-lg font-semibold text-indigo-900">
               Accounts Creation
             </h3>
@@ -20,9 +20,7 @@ export default function CreateAccountLayout({ auth, errors, children }) {
                 href={route("admin.students.create")}
               />
             </div>
-            <div className="border-b border-gray-200 bg-white p-6">
-              {children}
-            </div>
+            <div className="bg-white p-6">{children}</div>
           </div>
         </div>
       </div>

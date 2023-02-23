@@ -43,14 +43,14 @@ export default function Create(props) {
     <CreateAccountLayout auth={props.auth} errors={props.errors}>
       <Head title="Students" />
 
-      <div className="border-b border-gray-200 bg-white p-6">
+      <div className="bg-white p-6">
         {alert ? (
           <Alert alert={alert} children={"Account Created Successfull!"} />
         ) : (
           ""
         )}
         <h1 className="text-md pb-10 font-semibold">Create Teacher Account</h1>
-        <div className="border-b-2 pb-5">
+        <div className="pb-5">
           <form onSubmit={submit}>
             <div>
               <InputLabel forInput="name" value="Name" />

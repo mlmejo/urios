@@ -35,12 +35,12 @@ class SectionController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'name' => 'required|unique:sections',
+            'name' => 'required|string|unique:sections',
         ]);
 
         Section::create($validated);
 
-        return redirect(route('admin.sections.index'));
+        return redirect(route('admin.sections.create'));
     }
 
     /**

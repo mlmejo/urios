@@ -7,6 +7,7 @@ import { useState } from "react";
 export default function Index({ auth, errors, teachers }) {
   const [modal, setModal] = useState(false);
   const [alert, setAlert] = useState(modal);
+
   return (
     <AccountsLayout auth={auth} errors={errors}>
       <Head title="Teachers" />
