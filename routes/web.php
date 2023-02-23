@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -37,6 +39,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () {
+    Route::resource('sections', SectionController::class);
+    Route::resource('students', StudentController::class);
     Route::resource('teachers', TeacherController::class);
 });
 
