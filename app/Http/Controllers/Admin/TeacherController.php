@@ -88,6 +88,10 @@ class TeacherController extends Controller
 
         $teacher->delete();
 
+        
+
+         
+
         return redirect(route('admin.teachers.index'));
     }
 }

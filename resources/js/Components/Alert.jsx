@@ -1,14 +1,12 @@
-import { useState } from "react";
-
 export default function Alert({ children, alert }) {
-  const [theAlert, setAlert] = useState(alert);
+  const closeAlert = () => {
+    alert(false);
+  };
 
   return (
     <div
       id="alert-1"
-      className={`${
-        theAlert ? "" : "hidden "
-      } mb-4 flex justify-between rounded-lg  bg-green-300 p-4 text-green-700 transition-all delay-700 duration-700 ease-linear `}
+      className="mb-4 flex justify-between rounded-lg  bg-green-300 p-4 text-green-700 transition-all delay-700 duration-700 ease-linear"
       role="alert"
     >
       <div className="alert-text inline-flex ">
@@ -30,9 +28,7 @@ export default function Alert({ children, alert }) {
       </div>
 
       <button
-        onClick={() => {
-          setAlert(!theAlert);
-        }}
+        onClick={closeAlert}
         className="text-green-900-500 rounded-lg bg-green-300  hover:font-bold"
         aria-labelledby="Close"
       >

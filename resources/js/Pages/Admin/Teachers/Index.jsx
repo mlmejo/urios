@@ -1,30 +1,28 @@
 import { Head, Link } from "@inertiajs/react";
 import AccountsLayout from "@/Layouts/AccountsLayout";
+
+import { useState } from "react";
+
+// components
 import MyModal from "@/Components/MyModal";
 import Alert from "@/Components/Alert";
-import { useState } from "react";
 
 export default function Index({ auth, errors, teachers }) {
   const [modal, setModal] = useState(false);
-  const [alert, setAlert] = useState(modal);
+  const [alert, setAlert] = useState(false);
+
+  let content;
+  if (!modal && alert) {
+    content = <Alert alert={setAlert} children={"Deleted Successfully!"} />;
+  } else {
+    content = "";
+  }
 
   return (
     <AccountsLayout auth={auth} errors={errors}>
       <Head title="Teachers" />
-      <h3 className={` table-title py-5 text-2xl`}>Teacher Accounts</h3>
-      {/* Alert */}
-
-      {alert ? (
-        <Alert
-          alert={alert}
-          children={"Teacher account deleted successfully!"}
-        />
-      ) : (
-        ""
-      )}
-
-      {console.log(teachers)}
-
+      <h3 className="table-title py-5 text-2xl">Teacher Accounts</h3>
+      {content}
       <table className="w-full text-left text-sm text-gray-500">
         <thead className="bg-indigo-900  text-xs uppercase text-white ">
           <tr>
@@ -59,32 +57,26 @@ export default function Index({ auth, errors, teachers }) {
                 <td className="px-6 py-4">{teacher.user.email}</td>
 
                 <td className="flex space-x-4 px-6 py-4">
-                  {/* <a
-                    href="#"
-                    className="rounded-lg bg-blue-500 px-2 py-1 font-medium text-white"
-                  >
-                    Edit
-                  </a> */}
-                  <button
-                    onClick={() => {
-                      setModal(!modal);
-                    }}
-                    className="rounded-lg bg-blue-500 px-2 py-1 font-medium text-white"
-                  >
+                  <button className="rounded-lg bg-blue-500 px-2 py-1 font-medium text-white">
                     Edit
                   </button>
 
-                  <Link
-                    href={route("admin.teachers.destroy", teacher.id)}
+                  <button
                     className="rounded-lg bg-red-500 px-2 py-1 font-medium text-white"
-                    method="delete"
-                    as="button"
                     onClick={() => {
-                      setAlert(true);
+                      setModal(true);
                     }}
                   >
                     Delete
-                  </Link>
+                  </button>
+                  {modal && (
+                    <MyModal
+                      href={route("admin.teachers.destroy", teacher.id)}
+                      children={"Are you sure?"}
+                      show={setModal}
+                      alert={setAlert}
+                    />
+                  )}
                 </td>
               </tr>
             );

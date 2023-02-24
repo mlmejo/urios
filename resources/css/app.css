@@ -5,3 +5,15 @@
 .collapse-items > .sidebar-item {
     @apply pl-6;
 }
+
+@layer base {
+    .dropdown {
+        @apply flex flex-col;
+    }
+    .dropdown:empty {
+        @apply border-none;
+    }
+    .dropdown-row {
+        @apply block w-full overflow-y-auto border-[0.1px] p-3 text-start hover:bg-gray-400;
+    }
+}

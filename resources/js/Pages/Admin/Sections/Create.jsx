@@ -1,14 +1,17 @@
-import { Head, useForm, usePage } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 
+import { useState } from "react";
+
 export default function Create({ auth, errors, educational_stages }) {
   const { data, setData, post, processing, reset } = useForm({
     name: "",
   });
+  const [value, setValue] = useState("");
 
   const submit = (e) => {
     e.preventDefault();
@@ -35,15 +38,42 @@ export default function Create({ auth, errors, educational_stages }) {
                       placeHolder="Balagtas"
                     />
                   </div>
-                  <select name="education_stage" className="mb-3">
-                    {educational_stages.map((educational_stage, index) => {
-                      return (
-                        <option value={educational_stage.id} key={index}>
-                          {educational_stage.name}
-                        </option>
-                      );
-                    })}
-                  </select>
+
+                  <div className="input-group mb-3 ">
+                    <InputLabel value="Year Level" className="pb-3 " />
+                    <input
+                      type="text"
+                      name="year_level"
+                      id="year_level"
+                      value={value}
+                      onChange={(e) => setValue(e.target.value)}
+                      className="min-w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                    />
+                    <div className="dropdown">
+                      {educational_stages
+                        .filter((item) => {
+                          const searchGrade = value.toLowerCase();
+                          const fullGrade = item.name.toLowerCase();
+
+                          return (
+                            searchGrade &&
+                            fullGrade.startsWith(searchGrade) &&
+                            fullGrade !== searchGrade
+                          );
+                        })
+                        .slice(0, 10)
+                        .map((stage) => (
+                          <option
+                            className="dropdown-row"
+                            onClick={() => setValue(stage.name)}
+                            value={stage.name}
+                            key={stage.name}
+                          >
+                            {stage.name}
+                          </option>
+                        ))}
+                    </div>
+                  </div>
                   <div className="input-group col-span-2">
                     <PrimaryButton processing={processing}>
                       Submit
