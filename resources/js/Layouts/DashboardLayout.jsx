@@ -27,7 +27,11 @@ export default function DashboardLayout({ auth, errors, children }) {
                 Icon={UserGroupIcon}
                 href={route("admin.teachers.index")}
               />
-              <Item title="Sections" Icon={BuildingOfficeIcon} />
+              <Item
+                title="Sections"
+                Icon={BuildingOfficeIcon}
+                href={route("admin.sections.index")}
+              />
             </Collapse>
             <Collapse title="Create" Icon={PencilIcon}>
               <Item
@@ -35,7 +39,11 @@ export default function DashboardLayout({ auth, errors, children }) {
                 Icon={UserGroupIcon}
                 href={route("admin.teachers.create")}
               />
-              <Item title="Sections" Icon={BuildingOfficeIcon} />
+              <Item
+                title="Sections"
+                Icon={BuildingOfficeIcon}
+                href={route("admin.sections.create")}
+              />
               <Item title="Import CSV" Icon={DocumentTextIcon} />
             </Collapse>
             <Item title="Activity Log" Icon={ClockIcon} />
