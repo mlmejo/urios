@@ -1,24 +1,28 @@
-import { Head } from "@inertiajs/react";
-import { useState } from "react";
-
-import DangerButton from "@/Components/DangerButton";
-import Modal from "@/Components/Modal";
-import PrimaryButton from "@/Components/PrimaryButton";
+import { Head, Link } from "@inertiajs/react";
 import AccountsLayout from "@/Layouts/AccountsLayout";
 
-export default function Index({ auth, teachers }) {
-  const [teacher, setTeacher] = useState();
-  const [show, setShow] = useState(false);
+import { useState } from "react";
 
-  const handleClick = (teacher) => {
-    setShow(true);
-    setTeacher(teacher);
-  };
+// components
+import MyModal from "@/Components/MyModal";
+import Alert from "@/Components/Alert";
+
+export default function Index({ auth, errors, teachers }) {
+  const [modal, setModal] = useState(false);
+  const [alert, setAlert] = useState(false);
+
+  let content;
+  if (!modal && alert) {
+    content = <Alert alert={setAlert} children={"Deleted Successfully!"} />;
+  } else {
+    content = "";
+  }
 
   return (
-    <AccountsLayout auth={auth}>
+    <AccountsLayout auth={auth} errors={errors}>
       <Head title="Teachers" />
-
+      <h3 className="table-title py-5 text-2xl">Teacher Accounts</h3>
+      {content}
       <table className="w-full text-left text-sm text-gray-500">
         <thead className="bg-indigo-900  text-xs uppercase text-white ">
           <tr>
@@ -57,38 +61,28 @@ export default function Index({ auth, teachers }) {
                     Edit
                   </button>
 
-                  <DangerButton
+                  <button
                     className="rounded-lg bg-red-500 px-2 py-1 font-medium text-white"
-                    onClick={() => handleClick(teacher)}
+                    onClick={() => {
+                      setModal(true);
+                    }}
                   >
                     Delete
-                  </DangerButton>
+                  </button>
+                  {modal && (
+                    <MyModal
+                      href={route("admin.teachers.destroy", teacher.id)}
+                      children={"Are you sure?"}
+                      show={setModal}
+                      alert={setAlert}
+                    />
+                  )}
                 </td>
               </tr>
             );
           })}
         </tbody>
       </table>
-
-      <Modal show={show}>
-        <div className="relative h-full w-full max-w-md md:h-auto">
-          <div className="relative rounded-lg bg-white shadow">
-            <button
-              type="button"
-              className="absolute top-3 right-2.5 ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
-            >
-              <span className="sr-only">Close modal</span>
-              <span>X</span>
-            </button>
-            <div className="p-6 text-center">
-              <h3 className="mb-5 text-lg font-normal text-gray-500 ">
-                Are you sure you want to delete{" "}
-                {teacher ? teacher.user.name : ""}?
-              </h3>
-            </div>
-          </div>
-        </div>
-      </Modal>
     </AccountsLayout>
   );
 }

@@ -36,7 +36,7 @@ export default function Create(props) {
   const submit = (e) => {
     e.preventDefault();
 
-    post(route("admin.teachers.store"));
+    post(route("admin.teachers.store"), { onSuccess: () => reset() });
   };
 
   return (
