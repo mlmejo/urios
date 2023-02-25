@@ -13,10 +13,16 @@ export default function Create({ auth, errors, educational_stages }) {
   });
 
   const [value, setValue] = useState("");
+  const [hidden, setHidden] = useState(false);
 
   const submit = (e) => {
     e.preventDefault();
     post(route("admin.sections.store"), { onSuccess: () => reset() });
+  };
+
+  const click = (stage) => {
+    setValue(stage.name);
+    setHidden(true);
   };
 
   return (
@@ -45,6 +51,7 @@ export default function Create({ auth, errors, educational_stages }) {
                     <input
                       type="text"
                       name="year_level"
+                      onClick={() => setHidden(false)}
                       id="year_level"
                       value={value}
                       onChange={(e) => setValue(e.target.value)}
@@ -63,16 +70,20 @@ export default function Create({ auth, errors, educational_stages }) {
                           );
                         })
                         .slice(0, 10)
-                        .map((stage) => (
-                          <option
-                            className="dropdown-row"
-                            onClick={() => setValue(stage.name)}
-                            value={stage.name}
-                            key={stage.name}
-                          >
-                            {stage.name}
-                          </option>
-                        ))}
+                        .map((stage) => {
+                          return (
+                            <option
+                              className={`dropdown-row ${
+                                hidden ? "hidden" : ""
+                              }`}
+                              onClick={() => click(stage)}
+                              value={stage.name}
+                              key={stage.name}
+                            >
+                              {stage.name}
+                            </option>
+                          );
+                        })}
                     </div>
                   </div>
                   <div className="input-group col-span-2">

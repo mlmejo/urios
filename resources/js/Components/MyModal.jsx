@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
 
-export default function MyModal({ show, children, alert, href }) {
+export default function MyModal({ show, children, alert, href, user }) {
   const closeModal = () => {
     show(false);
   };
@@ -11,11 +11,11 @@ export default function MyModal({ show, children, alert, href }) {
   };
 
   return (
-    <div className="modals">
+    <div className="modals border-4">
       <div
         id="popup-modal"
         tabIndex={1}
-        className="h-modal fixed top-0 left-0 right-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden p-10 md:inset-0 md:h-full"
+        className="h-modal fixed top-0 left-0 right-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden  p-10 md:inset-0 md:h-full"
       >
         <div className="relative h-full w-full max-w-md md:h-auto">
           <div className="relative rounded-lg bg-white shadow">
@@ -30,6 +30,8 @@ export default function MyModal({ show, children, alert, href }) {
             <div className="p-6 text-center">
               <h3 className="mb-5 text-lg font-normal text-gray-500 ">
                 {children}
+                <br />
+                <b>{user}</b>
               </h3>
               <Link
                 href={href}
@@ -43,7 +45,7 @@ export default function MyModal({ show, children, alert, href }) {
 
               <button
                 type="button"
-                className="rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200"
+                className="rounded-lg border-2 border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200"
                 onClick={closeModal}
               >
                 No, cancel

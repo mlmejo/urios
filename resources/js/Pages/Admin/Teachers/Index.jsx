@@ -2,13 +2,16 @@ import { Head } from "@inertiajs/react";
 import { useState } from "react";
 
 import DangerButton from "@/Components/DangerButton";
-import Modal from "@/Components/Modal";
-import PrimaryButton from "@/Components/PrimaryButton";
+
+import Alert from "@/Components/Alert";
 import AccountsLayout from "@/Layouts/AccountsLayout";
+
+import MyModal from "@/Components/MyModal";
 
 export default function Index({ auth, teachers }) {
   const [teacher, setTeacher] = useState();
   const [show, setShow] = useState(false);
+  const [alert, setAlert] = useState(false);
 
   const handleClick = (teacher) => {
     setShow(true);
@@ -18,6 +21,23 @@ export default function Index({ auth, teachers }) {
   return (
     <AccountsLayout auth={auth}>
       <Head title="Teachers" />
+      <h3 className="table-title py-5 text-2xl">Teacher Accounts</h3>
+      {alert && (
+        <Alert
+          alert={setAlert}
+          children={`${teacher && teacher.user.name} deleted successfully!`}
+        />
+      )}
+
+      {teacher && show && (
+        <MyModal
+          show={setShow}
+          user={teacher.user.name}
+          alert={setAlert}
+          children={"Are you sure you want to delete "}
+          href={route("admin.teachers.destroy", teacher.id)}
+        />
+      )}
 
       <table className="w-full text-left text-sm text-gray-500">
         <thead className="bg-indigo-900  text-xs uppercase text-white ">
@@ -70,7 +90,7 @@ export default function Index({ auth, teachers }) {
         </tbody>
       </table>
 
-      <Modal show={show}>
+      {/* <Modal show={show}>
         <div className="relative h-full w-full max-w-md md:h-auto">
           <div className="relative rounded-lg bg-white shadow">
             <button
@@ -83,12 +103,22 @@ export default function Index({ auth, teachers }) {
             <div className="p-6 text-center">
               <h3 className="mb-5 text-lg font-normal text-gray-500 ">
                 Are you sure you want to delete{" "}
-                {teacher ? teacher.user.name : ""}?
+                {teacher ? teacher.user.name : ""}
               </h3>
+              {teacher && (
+                <Link
+                  className="rounded-lg bg-red-500 px-2 py-1 font-medium text-white"
+                  as="button"
+                  method="delete"
+                  href={route("admin.teachers.destroy", teacher.id)}
+                >
+                  Delete
+                </Link>
+              )}
             </div>
           </div>
         </div>
-      </Modal>
+      </Modal> */}
     </AccountsLayout>
   );
 }
