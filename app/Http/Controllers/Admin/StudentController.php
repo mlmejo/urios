@@ -40,9 +40,12 @@ class StudentController extends Controller
             'name' => 'required|string',
             'email' => 'required|email|unique:users',
             'password' => ['required', 'confirmed', Password::defaults()],
+            'section_id' => 'required|integer|exists:sections:id',
         ]);
 
-        $students = Student::create();
+        $students = Student::create([
+            'section_id' => $request->section_id,
+        ]);
 
         $students->user()->create([
             'name' => $request->name,
