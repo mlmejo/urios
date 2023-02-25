@@ -9,7 +9,7 @@ class Section extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'education_stage'];
+    protected $fillable = ['name', 'education_stage_id'];
 
     public function education_stage()
     {

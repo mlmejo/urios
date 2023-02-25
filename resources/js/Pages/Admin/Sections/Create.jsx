@@ -11,6 +11,7 @@ export default function Create({ auth, errors, educational_stages }) {
   const { data, setData, post, processing, reset } = useForm({
     name: "",
   });
+
   const [value, setValue] = useState("");
 
   const submit = (e) => {
@@ -33,7 +34,7 @@ export default function Create({ auth, errors, educational_stages }) {
                   <div className="input-group mb-3">
                     <InputLabel value="Section Name" className="pb-3" />
                     <TextInput
-                      onChange={(e) => setData("name", e.target.value)}
+                      handleChange={(e) => setData("name", e.target.value)}
                       autoComplete="off"
                       placeHolder="Balagtas"
                     />
