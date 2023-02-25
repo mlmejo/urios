@@ -20,7 +20,7 @@ export default function DashboardLayout({ auth, errors, children }) {
       <div className="flex">
         <div className="relative min-h-screen w-64 overflow-y-auto overflow-x-hidden bg-white p-2 shadow-lg">
           <div className="flex flex-col gap-y-2 py-6">
-            <Item title="Dashboard" Icon={HomeIcon} />
+            <Item title="Dashboard" Icon={HomeIcon} href={route("dashboard")} />
             <Collapse title="Data" Icon={CircleStackIcon}>
               <Item
                 title="Accounts"

@@ -4,9 +4,9 @@ import { useState } from "react";
 import DangerButton from "@/Components/DangerButton";
 
 import Alert from "@/Components/Alert";
-import AccountsLayout from "@/Layouts/AccountsLayout";
-
 import MyModal from "@/Components/MyModal";
+
+import AccountsLayout from "@/Layouts/AccountsLayout";
 
 export default function Index({ auth, teachers }) {
   const [teacher, setTeacher] = useState();

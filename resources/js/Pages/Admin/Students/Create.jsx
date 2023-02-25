@@ -14,8 +14,8 @@ export default function Create(props) {
   const { data, setData, post, processing, errors, reset } = useForm({
     name: "",
     email: "",
-    password: "",
-    password_confirmation: "",
+    password: "changeme",
+    password_confirmation: "changeme",
   });
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function Create(props) {
       <Head title="Students" />
       <div className="border-b border-gray-200 bg-white p-6">
         {alert ? (
-          <Alert alert={alert} children={"Account Created Successfull!"} />
+          <Alert alert={setAlert} children={"Account Created Successfully!"} />
         ) : (
           ""
         )}

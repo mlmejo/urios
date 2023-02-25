@@ -40,12 +40,12 @@ export default function Create(props) {
   };
 
   return (
-    <CreateAccountLayout auth={props.auth} errors={props.errors}>
+    <CreateAccountLayout auth={props.auth} errors={errors}>
       <Head title="Students" />
 
       <div className="bg-white p-6">
         {alert ? (
-          <Alert alert={alert} children={"Account Created Successfull!"} />
+          <Alert alert={setAlert} children={"Account Created Successfully!"} />
         ) : (
           ""
         )}

@@ -18,7 +18,7 @@ class SectionController extends Controller
     public function index(): Response
     {
         return Inertia::render('Admin/Sections/Index', [
-            'sections' => Section::orderBy('name'),
+            'sections' => Section::with('education_stage:id,name')->get(),
         ]);
     }
 
@@ -39,6 +39,7 @@ class SectionController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|unique:sections',
+            'education_stage_id' => 'required|integer|exists:education_stages,id',
         ]);
 
         Section::create($validated);

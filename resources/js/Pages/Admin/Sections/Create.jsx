@@ -5,24 +5,34 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 
+import Alert from "@/Components/Alert";
+
 import { useState } from "react";
 
-export default function Create({ auth, errors, educational_stages }) {
-  const { data, setData, post, processing, reset } = useForm({
+export default function Create({ auth, educational_stages }) {
+  const { data, setData, post, processing, errors, reset } = useForm({
     name: "",
+    education_stage_id: 1,
   });
 
+  const [alert, setAlert] = useState(false);
   const [value, setValue] = useState("");
   const [hidden, setHidden] = useState(false);
 
   const submit = (e) => {
     e.preventDefault();
+
     post(route("admin.sections.store"), { onSuccess: () => reset() });
   };
 
   const click = (stage) => {
     setValue(stage.name);
     setHidden(true);
+    setData("education_stage_id", stage.id);
+  };
+
+  const change = (e) => {
+    setValue(e.target.value);
   };
 
   return (
@@ -30,6 +40,14 @@ export default function Create({ auth, errors, educational_stages }) {
       <Head title="Create Section" />
       <div className="py-12">
         <div className="mx-auto min-h-screen max-w-7xl sm:px-6 lg:px-8">
+          {alert ? (
+            <Alert
+              alert={setAlert}
+              children={"Section Created Successfully!"}
+            />
+          ) : (
+            ""
+          )}
           <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
             <div className=" border-b border-gray-200 bg-white p-6">
               <h3 className="text-lg font-semibold text-indigo-900">
@@ -42,6 +60,7 @@ export default function Create({ auth, errors, educational_stages }) {
                     <TextInput
                       handleChange={(e) => setData("name", e.target.value)}
                       autoComplete="off"
+                      value={data.name}
                       placeHolder="Balagtas"
                     />
                   </div>
@@ -54,7 +73,7 @@ export default function Create({ auth, errors, educational_stages }) {
                       onClick={() => setHidden(false)}
                       id="year_level"
                       value={value}
-                      onChange={(e) => setValue(e.target.value)}
+                      onChange={(e) => change(e)}
                       className="min-w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     />
                     <div className="dropdown">
@@ -77,8 +96,8 @@ export default function Create({ auth, errors, educational_stages }) {
                                 hidden ? "hidden" : ""
                               }`}
                               onClick={() => click(stage)}
-                              value={stage.name}
-                              key={stage.name}
+                              value={stage.id}
+                              key={stage.id}
                             >
                               {stage.name}
                             </option>
@@ -87,7 +106,10 @@ export default function Create({ auth, errors, educational_stages }) {
                     </div>
                   </div>
                   <div className="input-group col-span-2">
-                    <PrimaryButton processing={processing}>
+                    <PrimaryButton
+                      onClick={() => setAlert(true)}
+                      processing={processing}
+                    >
                       Submit
                     </PrimaryButton>
                   </div>
