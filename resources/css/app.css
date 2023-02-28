@@ -20,4 +20,7 @@
     .dropdown-row {
         @apply w-full overflow-y-auto border-[0.1px] p-3 text-start hover:bg-gray-400;
     }
+    .mobile-view a.active {
+        @apply bg-indigo-700 text-white;
+    }
 }

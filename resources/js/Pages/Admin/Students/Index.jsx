@@ -49,7 +49,7 @@ export default function Index({ auth, errors }) {
             <td className="px-6 py-4">Jhoniel Villacura</td>
             <td className="px-6 py-4">jhoniel.villacura@gmail.com</td>
 
-            <td className="space-x-4 px-6 py-4 ">
+            <td className="flex-col space-y-1 px-6 py-4 text-center  lg:flex lg:flex-row lg:space-x-4 ">
               <a
                 href="#"
                 className="rounded-lg bg-blue-500 px-2 py-1 font-medium text-white"

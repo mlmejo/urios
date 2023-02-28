@@ -72,7 +72,7 @@ export default function Index({ auth, teachers }) {
                 <td className="px-6 py-4">{teacher.user.name}</td>
                 <td className="px-6 py-4">{teacher.user.email}</td>
 
-                <td className="flex space-x-4 px-6 py-4">
+                <td className="flex-col space-y-1 px-6 py-4 text-center  lg:flex lg:flex-row lg:space-x-4">
                   <button className="rounded-lg bg-blue-500 px-2 py-1 font-medium text-white">
                     Edit
                   </button>

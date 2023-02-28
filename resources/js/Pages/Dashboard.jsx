@@ -13,9 +13,9 @@ export default function Dashboard({
     <DashboardLayout auth={auth} errors={errors}>
       <Head title="Dashboard" />
       <div className="py-12">
-        <div className="mx-auto min-h-screen max-w-7xl sm:px-6 lg:px-8">
+        <div className="mx-2 min-h-screen max-w-7xl sm:px-6 lg:mx-auto lg:px-8">
           <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-            <div className="grid grid-cols-3 gap-5 border-b border-gray-200 bg-white p-6">
+            <div className="grid grid-cols-2 place-content-center gap-5 border-b border-gray-200 bg-white p-6 sm:grid-cols-3">
               <div className="accounts-card block max-w-sm rounded-md border-2 border-indigo-200 bg-indigo-300 p-6 shadow hover:bg-indigo-100">
                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-indigo-900 ">
                   Accounts Created

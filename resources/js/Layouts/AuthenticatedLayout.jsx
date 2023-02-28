@@ -11,7 +11,7 @@ export default function Authenticated({ auth, header, children }) {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <nav className="border-b border-gray-100 bg-white">
+      <nav className=" border-b border-gray-100 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 justify-between">
             <div className="flex">
@@ -21,12 +21,12 @@ export default function Authenticated({ auth, header, children }) {
                 </Link>
               </div>
 
-              <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+              <div className="my-auto sm:-my-px sm:ml-10 sm:flex sm:space-x-8">
                 <NavLink
                   href={route("dashboard")}
                   active={route().current("dashboard")}
                 >
-                  Dashboard
+                  Kamote System
                 </NavLink>
               </div>
             </div>
@@ -59,9 +59,19 @@ export default function Authenticated({ auth, header, children }) {
                   </Dropdown.Trigger>
 
                   <Dropdown.Content>
-                    <Dropdown.Link href={route("profile.edit")}>
-                      Profile
-                    </Dropdown.Link>
+                    <div className="pb-5 md:block lg:hidden">
+                      <Dropdown.Link href={route("dashboard")}>
+                        Dashboard
+                      </Dropdown.Link>
+                      <Dropdown.Link href={route("admin.teachers.index")}>
+                        Data
+                      </Dropdown.Link>
+                      <Dropdown.Link href={route("admin.teachers.create")}>
+                        Create
+                      </Dropdown.Link>
+                      <Dropdown.Link>Activity Log</Dropdown.Link>
+                    </div>
+                    <Dropdown.Link>Profile</Dropdown.Link>
                     <Dropdown.Link
                       href={route("logout")}
                       method="post"
@@ -118,7 +128,7 @@ export default function Authenticated({ auth, header, children }) {
             (showingNavigationDropdown ? "block" : "hidden") + " sm:hidden"
           }
         >
-          <div className="space-y-1 pt-2 pb-3">
+          <div className="hidden space-y-1 pt-2 pb-3">
             <ResponsiveNavLink
               href={route("dashboard")}
               active={route().current("dashboard")}
@@ -128,7 +138,7 @@ export default function Authenticated({ auth, header, children }) {
           </div>
 
           <div className="border-t border-gray-200 pt-4 pb-1">
-            <div className="px-4">
+            <div className="hidden px-4">
               <div className="text-base font-medium text-gray-800">
                 {auth.user.name}
               </div>
@@ -138,6 +148,18 @@ export default function Authenticated({ auth, header, children }) {
             </div>
 
             <div className="mt-3 space-y-1">
+              <div className="pb-5 md:block lg:hidden">
+                <ResponsiveNavLink href={route("dashboard")}>
+                  Dashboard
+                </ResponsiveNavLink>
+                <ResponsiveNavLink href={route("admin.teachers.index")}>
+                  Data
+                </ResponsiveNavLink>
+                <ResponsiveNavLink href={route("admin.teachers.create")}>
+                  Create
+                </ResponsiveNavLink>
+                <ResponsiveNavLink>Activity Log</ResponsiveNavLink>
+              </div>
               <ResponsiveNavLink href={route("profile.edit")}>
                 Profile
               </ResponsiveNavLink>

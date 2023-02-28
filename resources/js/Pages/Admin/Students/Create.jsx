@@ -48,6 +48,7 @@ export default function Create(props) {
         ) : (
           ""
         )}
+
         <h1 className="text-md pb-10 font-semibold">Create Student Account</h1>
         <div className="border-b-2 pb-5">
           <form onSubmit={submit}>

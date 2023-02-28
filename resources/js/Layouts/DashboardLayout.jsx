@@ -18,8 +18,8 @@ export default function DashboardLayout({ auth, errors, children }) {
   return (
     <AuthenticatedLayout auth={auth} errors={errors}>
       <div className="flex">
-        <div className="relative min-h-screen w-64 overflow-y-auto overflow-x-hidden bg-white p-2 shadow-lg">
-          <div className="flex flex-col gap-y-2 py-6">
+        <div className="relative min-h-screen overflow-y-auto overflow-x-hidden bg-white  shadow-lg  lg:w-64 lg:p-2">
+          <div className="hidden gap-y-2 py-6 lg:flex lg:flex-col">
             <Item title="Dashboard" Icon={HomeIcon} href={route("dashboard")} />
             <Collapse title="Data" Icon={CircleStackIcon}>
               <Item
