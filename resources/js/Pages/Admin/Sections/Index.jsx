@@ -6,15 +6,23 @@ import { useState } from "react";
 
 import Alert from "@/Components/Alert";
 import MyModal from "@/Components/MyModal";
+import AssignTeacherModal from "@/Components/AssignTeacherModal";
 
-export default function Index({ auth, errors, sections }) {
+export default function Index({ auth, errors, sections, teachers }) {
   const [section, setSection] = useState("");
   const [show, setShow] = useState(false);
+
   const [alert, setAlert] = useState(false);
+  const [assign, setAssign] = useState(false);
 
   const handleClick = (section) => {
     setShow(true);
     setSection(section);
+  };
+
+  const assignTeacher = (section) => {
+    setSection(section);
+    setAssign(true);
   };
 
   return (
@@ -39,6 +47,10 @@ export default function Index({ auth, errors, sections }) {
         />
       )}
 
+      {section && assign && (
+        <AssignTeacherModal show={setAssign} teachers={teachers} />
+      )}
+
       <table className="w-full text-left text-sm text-gray-500">
         <thead className="bg-indigo-900  text-xs uppercase text-white ">
           <tr>
@@ -51,7 +63,9 @@ export default function Index({ auth, errors, sections }) {
             <th scope="col" className="px-6 py-3">
               Section Grade Level
             </th>
-
+            <th scope="col" className="px-6 py-3">
+              Teachers
+            </th>
             <th scope="col" className="px-6 py-3">
               Action
             </th>
@@ -72,8 +86,15 @@ export default function Index({ auth, errors, sections }) {
                 </th>
                 <td className="px-6 py-4">{section.name}</td>
                 <td className="px-6 py-4">{section.education_stage.name}</td>
-
-                <td className="flex-col space-y-1 px-6 py-4 text-center  lg:flex lg:flex-row lg:space-x-4">
+                <td className="px-6 py-4">
+                  <button
+                    onClick={() => assignTeacher(section)}
+                    className="rounded-lg bg-emerald-500 px-3 py-1 text-white"
+                  >
+                    Assign
+                  </button>
+                </td>
+                <td className="flex-col space-y-1 px-6 py-4 text-center lg:flex  lg:flex-row  lg:space-x-4">
                   <button className="rounded-lg bg-blue-500 px-2 py-1 font-medium text-white">
                     Edit
                   </button>

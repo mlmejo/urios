@@ -34,6 +34,9 @@ export default function Index({ auth, errors }) {
               Email address
             </th>
             <th scope="col" className="px-6 py-3">
+              Teachers
+            </th>
+            <th scope="col" className="px-6 py-3">
               Action
             </th>
           </tr>

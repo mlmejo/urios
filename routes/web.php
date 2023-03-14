@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ExamController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\TeacherController;
@@ -32,6 +33,11 @@ Route::get('/', function () {
     ]);
 });
 
+
+Route::get("teachers/records/create", function() {
+    return Inertia::render("Teachers/Exams/Create");
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard', [
         'teachers' => Teacher::all(),
@@ -48,6 +54,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::name('admin.')->prefix('admin')->middleware(['auth'])->group(function () {
+    Route::resource('exams', ExamController::class);
     Route::resource('sections', SectionController::class);
     Route::resource('students', StudentController::class);
     Route::resource('teachers', TeacherController::class);

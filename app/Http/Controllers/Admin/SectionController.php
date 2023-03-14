@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\EducationStage;
 use App\Models\Section;
+use App\Models\Teacher;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -19,6 +20,7 @@ class SectionController extends Controller
     {
         return Inertia::render('Admin/Sections/Index', [
             'sections' => Section::with('education_stage:id,name')->get(),
+            'teachers' => Teacher::all(),
         ]);
     }
 
